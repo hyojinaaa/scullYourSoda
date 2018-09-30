@@ -21,21 +21,26 @@ const styles = {
     marginTop: '0',
   },
   label: {
-    color: 'white',
+    color: 'black',
     fontFamily: 'Roboto',
     fontSize: '24px',
     lineHeight: '32px',
-    fontWeight: '400',
+    fontWeight: '500',
+    marginTop: '0',
   },
   subscriptionInfoContainer: {
     border: '4px solid black',
     backgroundColor: 'rgba(255, 255, 255, 0.2)',
     padding: '24px',
+    maxWidth: '450px',
+    margin: '0 auto',
   },
 };
 
 class Subscription extends Component {
-  state = { subscription: {} };
+  state = {
+    subscription: {},
+  };
 
   componentDidMount() {
     const { params } = this.props.match;
@@ -49,24 +54,38 @@ class Subscription extends Component {
         subscription: {
           expire: data.subscription.expire,
           credit: data.subscription.credit,
+          role: data.subscription.role,
+          email: data.subscription.email,
         },
       });
     });
   }
 
   render() {
-    const { expire, credit } = this.state.subscription;
+    const { expire, credit, role, email } = this.state.subscription;
     return (
       <div style={styles.background}>
         <div>
           <h1 style={styles.title}>Scull Your Soda</h1>
-          <h2 style={styles.label}>Your Sodascription</h2>
           <div style={styles.subscriptionInfoContainer}>
+            <h2 style={styles.label}>Your Sodascription</h2>
             <p>
-              <strong>Expiration date:</strong> {expire}
+              <strong>Email:</strong> {email}
+            </p>
+            {role ? (
+              <p>
+                <strong>Role:</strong> {role}
+              </p>
+            ) : null}
+            <p>
+              <strong>Expiry date:</strong> {expire}
             </p>
             <p>
               <strong>Credit left:</strong> ${credit}
+            </p>
+            <p>
+              <strong>Need more credits or have too much money in your bank account?</strong>
+              <br /> Send some to 06 0577 0199755 00 Hyojin Jung
             </p>
           </div>
         </div>
