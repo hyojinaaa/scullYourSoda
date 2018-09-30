@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import background from '../images/waterfall.gif';
+import background from '../images/waterfall2.gif';
+import { firebaseApp } from '../base';
 
 const styles = {
   background: {
@@ -17,12 +18,7 @@ const styles = {
     fontSize: '100px',
     color: 'white',
     fontWeight: '500',
-  },
-  fieldset: {
-    display: 'flex',
-    flexWarp: 'wrap',
-    border: 'none',
-    textAlign: 'center',
+    marginTop: '0',
   },
   label: {
     color: 'white',
@@ -31,30 +27,48 @@ const styles = {
     lineHeight: '32px',
     fontWeight: '400',
   },
-  inbox: {
-    margin: '16px auto',
-    background: 'none',
+  subscriptionInfoContainer: {
     border: '4px solid black',
-    height: '36px',
-    padding: '0 8px',
-    width: '350px',
-    color: 'black',
-    fontSize: '14px',
-    fontFamily: 'Roboto',
-    outline: 'none',
+    backgroundColor: 'rgba(255, 255, 255, 0.2)',
+    padding: '24px',
   },
 };
 
 class Subscription extends Component {
+  state = { subscription: {} };
+
+  componentDidMount() {
+    const { params } = this.props.match;
+
+    const db = firebaseApp.database();
+    const ref = db.ref(`${params.userId}`);
+
+    ref.once('value').then(snapshot => {
+      const data = snapshot.val() || {};
+      this.setState({
+        subscription: {
+          expire: data.subscription.expire,
+          credit: data.subscription.credit,
+        },
+      });
+    });
+  }
+
   render() {
+    const { expire, credit } = this.state.subscription;
     return (
       <div style={styles.background}>
         <div>
           <h1 style={styles.title}>Scull Your Soda</h1>
-          <fieldset style={styles.fieldset}>
-            <label style={styles.label}>Your Sodascription</label>
-            <input style={styles.inbox} type="text" placeholder="Email" required />
-          </fieldset>
+          <h2 style={styles.label}>Your Sodascription</h2>
+          <div style={styles.subscriptionInfoContainer}>
+            <p>
+              <strong>Expiration date:</strong> {expire}
+            </p>
+            <p>
+              <strong>Credit left:</strong> ${credit}
+            </p>
+          </div>
         </div>
       </div>
     );

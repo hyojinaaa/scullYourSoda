@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import background from '../images/waterfall.gif';
+import background from '../images/waterfall3.gif';
 
 const styles = {
   background: {

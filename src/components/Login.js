@@ -21,11 +21,13 @@ const styles = {
   fieldset: {
     display: 'flex',
     flexWarp: 'wrap',
-    border: 'none',
-    textAlign: 'center',
+    width: '350px',
+    margin: '0 auto',
+    flexWrap: 'wrap',
   },
   label: {
     color: 'white',
+    margin: '0 auto',
     fontFamily: 'Roboto',
     fontSize: '24px',
     lineHeight: '32px',
@@ -46,15 +48,24 @@ const styles = {
 };
 
 class Login extends Component {
+  userId = React.createRef();
+
+  handleSubmit = event => {
+    event.preventDefault();
+    const userId = this.userId.current.value;
+    // Add  User ID Validation
+    this.props.history.push(`/subscription/${userId}`);
+  };
+
   render() {
     return (
       <div style={styles.background}>
         <div>
           <h1 style={styles.title}>Scull Your Soda</h1>
-          <fieldset style={styles.fieldset}>
+          <form style={styles.fieldset} onSubmit={this.handleSubmit}>
             <label style={styles.label}>Check my Sodascription</label>
-            <input style={styles.inbox} type="text" placeholder="Email" required />
-          </fieldset>
+            <input style={styles.inbox} type="text" placeholder="Email" required ref={this.userId} />
+          </form>
         </div>
       </div>
     );
