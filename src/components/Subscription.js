@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import background from './images/waterfall.gif';
+import background from '../images/waterfall.gif';
 
 const styles = {
   background: {
@@ -45,15 +45,15 @@ const styles = {
   },
 };
 
-class App extends Component {
+class Subscription extends Component {
   render() {
     return (
       <div style={styles.background}>
         <div>
           <h1 style={styles.title}>Scull Your Soda</h1>
           <fieldset style={styles.fieldset}>
-            <label style={styles.label}>Check my Sodascription</label>
-            <input style={styles.inbox} type="text" placeholder="Email" />
+            <label style={styles.label}>Your Sodascription</label>
+            <input style={styles.inbox} type="text" placeholder="Email" required />
           </fieldset>
         </div>
       </div>
@@ -61,4 +61,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Subscription;
