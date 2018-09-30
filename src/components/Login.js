@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import background from '../images/mainWaterfall.gif';
+import background from '../images/blowingWaterfall.gif';
 import * as EmailValidator from 'email-validator';
 import { firebaseApp } from '../base';
 
