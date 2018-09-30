@@ -1,18 +1,61 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import background from './images/waterfall.gif';
+
+const styles = {
+  background: {
+    backgroundImage: `url(${background})`,
+    backgroundRepeat: 'no-repeat',
+    width: '100%',
+    height: '100%',
+    backgroundSize: 'cover',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  title: {
+    fontFamily: 'Lobster',
+    fontSize: '100px',
+    color: 'white',
+    fontWeight: '500',
+  },
+  fieldset: {
+    display: 'flex',
+    flexWarp: 'wrap',
+    border: 'none',
+    textAlign: 'center',
+  },
+  label: {
+    color: 'white',
+    fontFamily: 'Roboto',
+    fontSize: '24px',
+    lineHeight: '32px',
+    fontWeight: '400',
+  },
+  inbox: {
+    margin: '16px auto',
+    background: 'none',
+    border: '4px solid black',
+    height: '36px',
+    padding: '0 8px',
+    width: '350px',
+    color: 'black',
+    fontSize: '14px',
+    fontFamily: 'Roboto',
+    outline: 'none',
+  },
+};
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+      <div style={styles.background}>
+        <div>
+          <h1 style={styles.title}>Scull Your Soda</h1>
+          <fieldset style={styles.fieldset}>
+            <label style={styles.label}>Check my Sodascription</label>
+            <input style={styles.inbox} type="text" placeholder="Email" />
+          </fieldset>
+        </div>
       </div>
     );
   }
