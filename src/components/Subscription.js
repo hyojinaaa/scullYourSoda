@@ -30,7 +30,7 @@ const styles = {
   },
   subscriptionInfoContainer: {
     border: '4px solid black',
-    backgroundColor: 'rgba(255, 255, 255, 0.2)',
+    backgroundColor: 'rgba(255, 255, 255, 0.4)',
     padding: '24px',
     maxWidth: '450px',
     margin: '0 auto',
@@ -38,9 +38,7 @@ const styles = {
 };
 
 class Subscription extends Component {
-  state = {
-    subscription: {},
-  };
+  state = {};
 
   componentDidMount() {
     const { params } = this.props.match;
@@ -51,18 +49,16 @@ class Subscription extends Component {
     ref.once('value').then(snapshot => {
       const data = snapshot.val() || {};
       this.setState({
-        subscription: {
-          expire: data.subscription.expire,
-          credit: data.subscription.credit,
-          role: data.subscription.role,
-          email: data.subscription.email,
-        },
+        expire: data.expire,
+        credit: data.credit,
+        role: data.role,
+        email: data.email,
       });
     });
   }
 
   render() {
-    const { expire, credit, role, email } = this.state.subscription;
+    const { expire, credit, role, email } = this.state;
     return (
       <div style={styles.background}>
         <div>
