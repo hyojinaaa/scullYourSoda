@@ -5,6 +5,7 @@
   "dependencies": {
     "email-validator": "^2.0.4",
     "firebase": "^5.5.2",
+    "netlify-cli": "^1.2.3",
     "re-base": "^4.0.0",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",

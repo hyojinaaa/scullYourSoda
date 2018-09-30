@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import background from '../images/waterfall2.gif';
+import background from '../images/subsWaterfall.gif';
 import { firebaseApp } from '../base';
 
 const styles = {
