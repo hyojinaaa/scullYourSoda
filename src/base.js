@@ -1,10 +1,13 @@
 import Rebase from 're-base';
-import * as firebase from 'firebase';
+import firebase from 'firebase/app';
+import { config } from './config';
+import 'firebase/auth';
+import 'firebase/database';
 
 const app = firebase.initializeApp({
-  apiKey: 'AIzaSyAAZbVQNNLHcPk0rgP9U13Z539emIMJ_As',
-  authDomain: 'scullyoursoda.firebaseapp.com',
-  databaseURL: 'https://scullyoursoda.firebaseio.com',
+  apiKey: config.firebase.apiKey,
+  authDomain: config.firebase.authDomain,
+  databaseURL: config.firebase.databaseURL,
 });
 
 const base = Rebase.createClass(app.database());
