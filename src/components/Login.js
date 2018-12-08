@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import background from '../images/blowingWaterfall.gif';
 import * as EmailValidator from 'email-validator';
 import { firebaseApp } from '../base';
@@ -56,6 +57,10 @@ const styles = {
 };
 
 class Login extends Component {
+  static propTypes = {
+    history: PropTypes.func,
+  };
+
   userEmail = React.createRef();
   state = {};
 
@@ -103,7 +108,8 @@ class Login extends Component {
       this.findMatchedUser(userEmail);
     } else {
       this.setState({
-        errorMessage: 'Hey, type a valid email or practice your typing at https://play.typeracer.com',
+        errorMessage:
+          'Hey, type a valid email or practice your typing at https://play.typeracer.com',
       });
     }
   };
@@ -124,7 +130,9 @@ class Login extends Component {
               ref={this.userEmail}
               onChange={this.removeErrorMessage}
             />
-            {errorMessage ? <p style={styles.errorMessage}>{errorMessage}</p> : null}
+            {errorMessage ? (
+              <p style={styles.errorMessage}>{errorMessage}</p>
+            ) : null}
           </form>
         </div>
       </div>

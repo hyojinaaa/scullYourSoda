@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import background from '../images/calmWaterfall.gif';
 import { firebaseApp } from '../base';
-import { withStyles } from '@material-ui/core/styles';
+// import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -45,13 +46,15 @@ const styles = {
 };
 
 class Subscription extends Component {
-  state = {};
+  static propTypes = {
+    match: PropTypes.shape({}),
+  };
 
   componentDidMount() {
-    const { params } = this.props.match;
+    const { match } = this.props;
 
     const db = firebaseApp.database();
-    const ref = db.ref(`${params.userId}`);
+    const ref = db.ref(`${match.params.userId}`);
 
     ref.once('value').then(snapshot => {
       const data = snapshot.val() || {};
@@ -99,7 +102,9 @@ class Subscription extends Component {
               <strong>Credit left:</strong> ${credit}
             </p>
             <p>
-              <strong>Need more credits or have too much money in your bank account?</strong>
+              <strong>
+                Need more credits or have too much money in your bank account?
+              </strong>
               <br /> Send some to 06 0577 0199755 00 Hyojin Jung
             </p>
           </div>

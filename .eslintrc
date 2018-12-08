@@ -3,19 +3,16 @@
     "standard",
     "plugin:flowtype/recommended",
     "plugin:react/recommended",
-    "plugin:unicorn/recommended",
     "prettier",
     "prettier/flowtype",
     "prettier/react",
-    "prettier/standard",
-    "prettier/unicorn"
+    "prettier/standard"
   ],
   "plugins": [
     "flowtype",
     "react",
     "prettier",
-    "standard",
-    "unicorn"
+    "standard"
   ],
   "parserOptions": {
     "ecmaVersion": 6,
