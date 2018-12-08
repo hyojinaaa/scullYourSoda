@@ -58,7 +58,7 @@ const styles = {
 
 class Login extends Component {
   static propTypes = {
-    history: PropTypes.func,
+    history: PropTypes.shape({}),
   };
 
   userEmail = React.createRef();
@@ -77,6 +77,7 @@ class Login extends Component {
   };
 
   findMatchedUser = email => {
+    const { history } = this.props;
     firebaseApp
       .database()
       .ref()
@@ -85,7 +86,7 @@ class Login extends Component {
       .on('value', snapshot => {
         if (snapshot.exists()) {
           let keyValue = this.forEachSnapshotData(snapshot);
-          this.props.history.push(`subscription/${keyValue}`);
+          history.push(`subscription/${keyValue}`);
         } else {
           this.setState({
             errorMessage: "You're not a cool kid so you're not invited.",

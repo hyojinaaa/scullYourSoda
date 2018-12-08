@@ -6,13 +6,15 @@
     "prettier",
     "prettier/flowtype",
     "prettier/react",
-    "prettier/standard"
+    "prettier/standard",
+    "plugin:testcafe/recommended"
   ],
   "plugins": [
     "flowtype",
     "react",
     "prettier",
-    "standard"
+    "standard",
+    "testcafe"
   ],
   "parserOptions": {
     "ecmaVersion": 6,

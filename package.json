@@ -41,8 +41,9 @@
     "eslint-plugin-promise": "^4.0.1",
     "eslint-plugin-react": "^7.11.1",
     "eslint-plugin-standard": "^4.0.0",
+    "eslint-plugin-testcafe": "^0.2.1",
     "husky": "^0.14.3",
-    "lint-staged": "^7.2.2",
+    "lint-staged": "^7.3.0",
     "prettier": "^1.14.3"
   },
   "eslintConfig": {
@@ -92,6 +93,11 @@
     "singleQuote": true,
     "trailingComma": "all",
     "parser": "flow"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   },
   "lint-staged": {
     "*.js": [
