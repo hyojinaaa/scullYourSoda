@@ -2,11 +2,7 @@ import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import background from '../images/calmWaterfall.gif';
 import { firebaseApp } from '../base';
-import { withStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
+import Navigation from './Navigation';
 
 const styles = {
   background: {
@@ -41,18 +37,11 @@ const styles = {
     maxWidth: '450px',
     margin: '0 auto',
   },
-  colorDefault: {
-    backgroundColor: '#212121',
-  },
-  root: {
-    justifyContent: 'space-between',
-  },
 };
 
 class Subscription extends Component {
   static propTypes = {
     match: PropTypes.shape({}),
-    classes: PropTypes.shape({}).isRequired,
   };
 
   state = {};
@@ -76,18 +65,10 @@ class Subscription extends Component {
 
   render() {
     const { expire, credit, role, email } = this.state;
-    const { classes } = this.props;
 
     return (
       <Fragment>
-        <AppBar position="absolute" className={classes.colorDefault}>
-          <Toolbar className={classes.root}>
-            <Typography variant="h6" color="inherit">
-              Subscription
-            </Typography>
-            <Button color="inherit">Log out</Button>
-          </Toolbar>
-        </AppBar>
+        <Navigation />
         <div style={styles.background}>
           <div>
             <h1 style={styles.title}>Scull Your Soda</h1>
@@ -121,4 +102,4 @@ class Subscription extends Component {
   }
 }
 
-export default withStyles(styles)(Subscription);
+export default Subscription;
