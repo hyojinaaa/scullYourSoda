@@ -1,14 +1,12 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import background from '../images/calmWaterfall.gif';
 import { firebaseApp } from '../base';
-// import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
 
 const styles = {
   background: {
@@ -43,12 +41,21 @@ const styles = {
     maxWidth: '450px',
     margin: '0 auto',
   },
+  colorDefault: {
+    backgroundColor: '#212121',
+  },
+  root: {
+    justifyContent: 'space-between',
+  },
 };
 
 class Subscription extends Component {
   static propTypes = {
     match: PropTypes.shape({}),
+    classes: PropTypes.shape({}).isRequired,
   };
+
+  state = {};
 
   componentDidMount() {
     const { match } = this.props;
@@ -69,49 +76,49 @@ class Subscription extends Component {
 
   render() {
     const { expire, credit, role, email } = this.state;
+    const { classes } = this.props;
 
     return (
-      <div style={styles.background}>
-        <AppBar position="static">
-          <Toolbar>
-            <IconButton color="inherit" aria-label="Menu">
-              <MenuIcon />
-            </IconButton>
+      <Fragment>
+        <AppBar position="absolute" className={classes.colorDefault}>
+          <Toolbar className={classes.root}>
             <Typography variant="h6" color="inherit">
-              News
+              Subscription
             </Typography>
-            <Button color="inherit">Login</Button>
+            <Button color="inherit">Log out</Button>
           </Toolbar>
         </AppBar>
-        <div>
-          <h1 style={styles.title}>Scull Your Soda</h1>
-          <div style={styles.subscriptionInfoContainer}>
-            <h2 style={styles.label}>Your Sodascription</h2>
-            <p>
-              <strong>Email:</strong> {email}
-            </p>
-            {role ? (
+        <div style={styles.background}>
+          <div>
+            <h1 style={styles.title}>Scull Your Soda</h1>
+            <div style={styles.subscriptionInfoContainer}>
+              <h2 style={styles.label}>Your Sodascription</h2>
               <p>
-                <strong>Role:</strong> {role}
+                <strong>Email:</strong> {email}
               </p>
-            ) : null}
-            <p>
-              <strong>Expiry date:</strong> {expire}
-            </p>
-            <p>
-              <strong>Credit left:</strong> ${credit}
-            </p>
-            <p>
-              <strong>
-                Need more credits or have too much money in your bank account?
-              </strong>
-              <br /> Send some to 06 0577 0199755 00 Hyojin Jung
-            </p>
+              {role ? (
+                <p>
+                  <strong>Role:</strong> {role}
+                </p>
+              ) : null}
+              <p>
+                <strong>Expiry date:</strong> {expire}
+              </p>
+              <p>
+                <strong>Credit left:</strong> ${credit}
+              </p>
+              <p>
+                <strong>
+                  Need more credits or have too much money in your bank account?
+                </strong>
+                <br /> Send some to 06 0577 0199755 00 Hyojin Jung
+              </p>
+            </div>
           </div>
         </div>
-      </div>
+      </Fragment>
     );
   }
 }
 
-export default Subscription;
+export default withStyles(styles)(Subscription);
