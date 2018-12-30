@@ -25,7 +25,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "lint": "eslint \"src/**/*.js\""
+    "lint": "eslint \"src/**/*.js\"",
+    "e2e": "testcafe chrome e2e/**"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
@@ -48,7 +49,8 @@
     "eslint-plugin-testcafe": "^0.2.1",
     "husky": "^0.14.3",
     "lint-staged": "^7.3.0",
-    "prettier": "^1.15.3"
+    "prettier": "^1.15.3",
+    "testcafe": "^0.23.3"
   },
   "eslintConfig": {
     "plugins": [
