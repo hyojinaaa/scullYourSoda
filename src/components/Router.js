@@ -6,6 +6,7 @@ import Login from '../components/Login';
 import Subscription from '../components/Subscription';
 import NotFound from '../components/NotFound';
 import SubscriptionBoard from '../components/SubscriptionBoard';
+import Checkout from '../components/Checkout';
 
 const Router = () => (
   <Provider store={store}>
@@ -14,6 +15,7 @@ const Router = () => (
         <Route exact path="/" component={Login} />
         <Route path="/subscription/:userId" component={Subscription} />
         <Route path="/subscriptionBoard" component={SubscriptionBoard} />
+        <Route path="/checkout" component={Checkout} />
         <Route component={NotFound} />
       </Switch>
     </BrowserRouter>

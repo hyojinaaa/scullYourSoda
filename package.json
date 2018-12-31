@@ -16,6 +16,7 @@
     "react-router-dom": "^4.3.1",
     "react-router-redux": "^4.0.8",
     "react-scripts": "1.1.5",
+    "react-stripe-elements": "^2.0.1",
     "recompose": "^0.30.0",
     "redux": "^4.0.1",
     "testcafe-react-selectors": "^3.0.0"

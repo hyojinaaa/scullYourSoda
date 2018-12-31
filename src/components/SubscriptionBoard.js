@@ -13,6 +13,9 @@ import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import Navigation from './Navigation';
 import background from '../images/calmWaterfall.gif';
 
+// To- Dos
+// Clean this code
+// Config file
 const styles = theme => ({
   background: {
     backgroundImage: `url(${background})`,
@@ -83,7 +86,6 @@ class CheckboxList extends React.Component {
   render() {
     const { classes } = this.props;
     const { userData } = this.state;
-    console.log(userData);
 
     return (
       <Fragment>
