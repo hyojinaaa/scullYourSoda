@@ -1,3 +1,8 @@
+export const updateUserData = data => ({
+  type: 'USERS',
+  data,
+});
+
 export const logout = () => ({
   type: 'LOGOUT',
 });
