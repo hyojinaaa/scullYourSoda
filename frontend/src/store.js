@@ -5,6 +5,7 @@ export const defaultState = {
   accountState: {
     login: true,
   },
+  trolly: {},
 };
 
 const store = createStore(rootReducer, defaultState);

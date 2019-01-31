@@ -16,6 +16,7 @@ const Router = () => (
         <Route path="/subscription/:userId" component={Subscription} />
         <Route path="/subscriptionBoard" component={SubscriptionBoard} />
         <Route path="/checkout" component={Checkout} />
+        <Route path="/charge" />
         <Route component={NotFound} />
       </Switch>
     </BrowserRouter>

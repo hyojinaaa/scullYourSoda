@@ -1,13 +1,12 @@
 import Rebase from 're-base';
 import firebase from 'firebase/app';
-import { config } from './config';
 import 'firebase/auth';
 import 'firebase/database';
 
 const app = firebase.initializeApp({
-  apiKey: config.firebase.apiKey,
-  authDomain: config.firebase.authDomain,
-  databaseURL: config.firebase.databaseURL,
+  apiKey: process.env.REACT_APP_FIREBASE_APIKEY,
+  authDomain: process.env.REACT_APP_FIREBASE_AUTHDOMAIN,
+  databaseURL: process.env.REACT_APP_FIREBASE_DATABASE_URL,
 });
 
 const base = Rebase.createClass(app.database());

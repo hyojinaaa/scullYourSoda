@@ -12,6 +12,11 @@ import Button from '@material-ui/core/Button';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import Navigation from './Navigation';
 import background from '../images/calmWaterfall.gif';
+import Trolly from './Trolly';
+import { compose } from 'recompose';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import * as actionCreators from '../actions/actionCreators';
 
 // To- Dos
 // Clean this code
@@ -50,8 +55,14 @@ const styles = theme => ({
 });
 
 class CheckboxList extends React.Component {
+  static propTypes = {
+    updateTrolly: PropTypes.func,
+    classes: PropTypes.shape({}),
+    trollyState: PropTypes.shape({}),
+  };
+
   state = {
-    checked: [0],
+    checked: {},
     userData: {},
   };
 
@@ -67,26 +78,36 @@ class CheckboxList extends React.Component {
     });
   }
 
-  handleToggle = value => () => {
-    const { checked } = this.state;
-    const currentIndex = checked.indexOf(value);
-    const newChecked = [...checked];
+  handleChange = name => event => {
+    this.setState(
+      {
+        ...this.state,
+        checked: {
+          ...this.state.checked,
+          [name]: event.target.checked,
+        },
+      },
+      this.updateTrollyState(name, event.target.checked),
+    );
+  };
 
-    if (currentIndex === -1) {
-      newChecked.push(value);
-    } else {
-      newChecked.splice(currentIndex, 1);
-    }
-
-    this.setState({
-      checked: newChecked,
+  updateTrollyState = (name, value) => {
+    console.log({
+      name,
+      value,
     });
+    this.props.updateTrolly(name, value);
   };
 
   render() {
     const { classes } = this.props;
     const { userData } = this.state;
+    const checkedValueExisted =
+      Object.values(this.state.checked).indexOf(true) >= 0;
 
+    console.log({
+      state: this.props.trollyState,
+    });
     return (
       <Fragment>
         <Navigation />
@@ -108,7 +129,10 @@ class CheckboxList extends React.Component {
                   {Object.keys(userData).map(userId => (
                     <TableRow key={userId}>
                       <TableCell>
-                        <Checkbox />
+                        <Checkbox
+                          checked={this.state.checked.userId}
+                          onChange={this.handleChange(userId)}
+                        />
                       </TableCell>
                       <TableCell component="th" scope="row">
                         {userData[userId].email}
@@ -128,13 +152,24 @@ class CheckboxList extends React.Component {
             </div>
           </div>
         </div>
+
+        {checkedValueExisted && <Trolly />}
       </Fragment>
     );
   }
 }
 
-CheckboxList.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
+const mapStateToProps = state => ({
+  trollyState: state.trolly,
+});
 
-export default withStyles(styles)(CheckboxList);
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(actionCreators, dispatch);
+
+export default compose(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps,
+  ),
+  withStyles(styles),
+)(CheckboxList);
