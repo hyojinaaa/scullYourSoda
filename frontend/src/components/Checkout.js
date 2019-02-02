@@ -6,7 +6,6 @@ const Checkout = () => {
   return (
     <StripeProvider apiKey={process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY}>
       <div>
-        <h1>React Stripe Elements Example</h1>
         <Elements>
           <CheckoutForm />
         </Elements>

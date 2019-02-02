@@ -7,6 +7,9 @@ export const defaultState = {
     login: true,
   },
   trolly: {},
+  checkout: {
+    price: '0',
+  },
 };
 
 const store = createStore(rootReducer, defaultState);

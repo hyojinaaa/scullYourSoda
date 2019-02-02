@@ -13,4 +13,7 @@ export const updateTrolly = (userId, value) => ({
   value,
 });
 
-// Checkout
+export const setCheckoutPrice = price => ({
+  type: 'CHECKOUT_PRICE',
+  price,
+});
