@@ -7,8 +7,6 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Checkbox from '@material-ui/core/Checkbox';
-import Button from '@material-ui/core/Button';
-import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import { compose } from 'recompose';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -45,8 +43,7 @@ class SubscriptionTable extends React.Component {
             <TableCell>Select</TableCell>
             <TableCell>User email</TableCell>
             <TableCell numeric>Credit</TableCell>
-            <TableCell>Expire</TableCell>
-            <TableCell>Purchase</TableCell>
+            <TableCell numeric>Expire</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -58,17 +55,9 @@ class SubscriptionTable extends React.Component {
                   onChange={this.handleChange(userId)}
                 />
               </TableCell>
-              <TableCell component="th" scope="row">
-                {userData[userId].email}
-              </TableCell>
+              <TableCell>{userData[userId].email}</TableCell>
               <TableCell numeric>{userData[userId].credit}</TableCell>
               <TableCell numeric>{userData[userId].expire}</TableCell>
-              <TableCell>
-                <Button variant="contained" color="primary">
-                  Purchase
-                  <AddShoppingCartIcon className={classes.rightIcon} />
-                </Button>
-              </TableCell>
             </TableRow>
           ))}
         </TableBody>

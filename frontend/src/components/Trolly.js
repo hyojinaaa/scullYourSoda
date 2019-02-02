@@ -7,6 +7,11 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import Button from '@material-ui/core/Button';
+import { compose } from 'recompose';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import * as actionCreators from '../actions/actionCreators';
 
 const styles = {
   root: {
@@ -17,11 +22,22 @@ const styles = {
 
 class Trolly extends Component {
   propTypes = {
-    classes: PropTypes.object.isRequired,
+    classes: PropTypes.shape({}).isRequired,
+    trollyState: PropTypes.shape({}).isRequired,
+    userData: PropTypes.shape({}).isRequired,
   };
 
   render() {
-    const { classes } = this.props;
+    const { classes, trollyState, userData } = this.props;
+
+    const trueTrollyValues = () => {
+      const filtered = Object.keys(trollyState).filter(function(key) {
+        return trollyState[key];
+      });
+      return filtered;
+    };
+
+    const trolleySubTotal = trueTrollyValues().length * 3.5;
 
     return (
       <div className={classes.root}>
@@ -36,17 +52,41 @@ class Trolly extends Component {
             </TableRow>
           </TableHead>
           <TableBody>
-            {/* {Object.keys(checkoutDate).map(userId => (
+            {trueTrollyValues().map(userId => (
               <TableRow key={userId}>
-                <TableCell>{checkoutDate[userId].credit}</TableCell>
-                <TableCell>{checkoutDate[userId].expire}</TableCell>
+                <TableCell>
+                  One month Sodascription for{' '}
+                  <strong>{userData[userId].email}</strong>
+                </TableCell>
+                <TableCell>$3.5 NZD</TableCell>
               </TableRow>
-            ))} */}
+            ))}
+            <TableRow>
+              <TableCell>Trolley subtotal: </TableCell>
+              <TableCell>${trolleySubTotal} NZD</TableCell>
+            </TableRow>
           </TableBody>
         </Table>
+        <Button variant="contained" color="primary">
+          Proceed to checkout
+        </Button>
       </div>
     );
   }
 }
 
-export default withStyles(styles)(Trolly);
+const mapStateToProps = state => ({
+  trollyState: state.trolly,
+  userData: state.userData,
+});
+
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(actionCreators, dispatch);
+
+export default compose(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps,
+  ),
+  withStyles(styles),
+)(Trolly);
