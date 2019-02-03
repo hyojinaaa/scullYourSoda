@@ -52,10 +52,10 @@ class Trolly extends Component {
     return filtered;
   };
 
-  trolleySubTotal = this.trueTrollyValues().length * 3.5;
+  trolleySubTotal = () => this.trueTrollyValues().length * 3.5;
 
   handleOpenCheckout = () => {
-    this.props.setCheckoutPrice(this.trolleySubTotal);
+    this.props.setCheckoutPrice(this.trolleySubTotal());
     this.setState({ open: true });
   };
 
@@ -90,7 +90,7 @@ class Trolly extends Component {
             ))}
             <TableRow>
               <TableCell>Trolley subtotal: </TableCell>
-              <TableCell>${this.trolleySubTotal} NZD</TableCell>
+              <TableCell>${this.trolleySubTotal()} NZD</TableCell>
             </TableRow>
           </TableBody>
         </Table>

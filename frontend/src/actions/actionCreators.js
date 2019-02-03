@@ -13,6 +13,10 @@ export const updateTrolly = (userId, value) => ({
   value,
 });
 
+export const emptyTrolly = () => ({
+  type: 'EMPTY_TROLLY',
+});
+
 export const setCheckoutPrice = price => ({
   type: 'CHECKOUT_PRICE',
   price,

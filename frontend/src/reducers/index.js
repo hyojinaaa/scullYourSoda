@@ -47,6 +47,8 @@ function trolly(state = {}, action) {
         ...state,
         [userId]: value,
       };
+    case 'EMPTY_TROLLY':
+      return {};
 
     default:
       return state;

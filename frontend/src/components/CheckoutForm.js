@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import { CardElement, injectStripe } from 'react-stripe-elements';
 import Typography from '@material-ui/core/Typography';
+import { withRouter } from 'react-router-dom';
 import { compose } from 'recompose';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -24,8 +25,10 @@ class CheckoutForm extends Component {
       .createToken({ name: 'Name' }) // eslint-disable-line
       .then(({ token }) => {
         console.log('Received Stripe token:', token);
+        this.setState({
+          processing: true,
+        });
         this.sendToken(token);
-        this.setState({ complete: true });
       })
       .catch(error => console.log('create token error', error));
   };
@@ -38,9 +41,11 @@ class CheckoutForm extends Component {
         currency: 'NZD',
         amount: convertDollarsToCents,
       })
-      .then(responseJson => {
-        console.log(responseJson);
-        // Do something with the response
+      .then(response => {
+        if (response.status === 200) {
+          console.log({ response });
+          this.props.history.push('/paymentSuccess');
+        }
       })
       .catch(error => {
         console.log('sendToken error', error);
@@ -49,7 +54,7 @@ class CheckoutForm extends Component {
 
   render() {
     const { checkout } = this.props;
-    if (this.state.complete) return <h1>Purchase Complete</h1>;
+    if (this.state.processing) return <h1>Proceeding...🤑</h1>;
 
     return (
       <div className="checkout">
@@ -62,17 +67,14 @@ class CheckoutForm extends Component {
     );
   }
 }
-
 const mapStateToProps = state => ({
   checkout: state.checkout,
 });
-
 const mapDispatchToProps = dispatch =>
   bindActionCreators(actionCreators, dispatch);
-
 export default compose(
   connect(
     mapStateToProps,
     mapDispatchToProps,
   ),
-)(injectStripe(CheckoutForm));
+)(withRouter(injectStripe(CheckoutForm)));
