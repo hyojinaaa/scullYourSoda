@@ -12,14 +12,12 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as actionCreators from '../actions/actionCreators';
 
-const styles = theme => ({
+const styles = {
   table: {
     minWidth: 700,
+    marginTop: '70px',
   },
-  rightIcon: {
-    marginLeft: theme.spacing.unit,
-  },
-});
+};
 
 class SubscriptionTable extends React.Component {
   static propTypes = {
@@ -53,6 +51,7 @@ class SubscriptionTable extends React.Component {
                 <Checkbox
                   checked={trollyState.userId}
                   onChange={this.handleChange(userId)}
+                  color="secondary"
                 />
               </TableCell>
               <TableCell>{userData[userId].email}</TableCell>

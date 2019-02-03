@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import background from '../images/blowingWaterfall.gif';
 import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'recompose';
 import { connect } from 'react-redux';
@@ -20,49 +21,18 @@ const styles = {
     alignItems: 'center',
   },
   title: {
-    fontFamily: 'Lobster',
-    fontSize: '100px',
+    fontFamily: 'Anton',
+    fontSize: '32px',
     color: 'white',
     fontWeight: '500',
     marginTop: '0',
-  },
-  fieldset: {
-    display: 'flex',
-    flexWarp: 'wrap',
-    width: '350px',
-    margin: '0 auto',
-    flexWrap: 'wrap',
-  },
-  label: {
-    color: 'white',
-    margin: '0 auto',
-    fontFamily: 'Roboto',
-    fontSize: '24px',
-    lineHeight: '32px',
-    fontWeight: '400',
-  },
-  inbox: {
-    margin: '16px auto',
-    background: 'none',
-    border: '4px solid black',
-    height: '36px',
-    padding: '0 8px',
-    width: '350px',
-    color: 'black',
-    fontSize: '14px',
-    fontFamily: 'Roboto',
-    outline: 'none',
-    marginBottom: '0',
-  },
-  errorMessage: {
-    color: 'red',
-    marginTop: '16px',
   },
 };
 
 class PaymentSuccess extends Component {
   static propTypes = {
-    history: PropTypes.shape({}),
+    history: PropTypes.shape({}).isRequired,
+    emptyTrolly: PropTypes.shape({}).isRequired,
   };
 
   handleRedirect = () => {
@@ -76,23 +46,39 @@ class PaymentSuccess extends Component {
       <div style={styles.background}>
         <div>
           <h1 style={styles.title}>Scull Your Soda</h1>
-          <p style={{ color: 'white' }}>Purchase Complete!</p>
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={this.handleRedirect}
+          <Typography
+            style={{ color: 'white', fontSize: '60px', textAlign: 'center' }}
           >
-            Go back to dashboard
-          </Button>
+            Purchase Complete!
+          </Typography>
+          <Typography
+            style={{
+              color: 'white',
+              fontSize: '60px',
+              textAlign: 'center',
+              marginTop: '0',
+            }}
+          >
+            🤑🤑🤑🤑🤑🤑🤑
+          </Typography>
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              paddingTop: '48px',
+            }}
+          >
+            <Button variant="contained" onClick={this.handleRedirect}>
+              Go back to dashboard
+            </Button>
+          </div>
         </div>
       </div>
     );
   }
 }
-
 const mapDispatchToProps = dispatch =>
   bindActionCreators(actionCreators, dispatch);
-
 export default compose(
   connect(
     null,

@@ -13,7 +13,7 @@ const styles = {
     alignItems: 'center',
   },
   title: {
-    fontFamily: 'Lobster',
+    fontFamily: 'Anton',
     fontSize: '100px',
     color: 'white',
     fontWeight: '500',
@@ -21,7 +21,7 @@ const styles = {
     margin: '0',
   },
   headingTwo: {
-    fontFamily: 'Lobster',
+    fontFamily: 'Anton',
     fontSize: '60px',
     color: 'white',
     fontWeight: '500',

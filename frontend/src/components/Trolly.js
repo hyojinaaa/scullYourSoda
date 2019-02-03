@@ -19,16 +19,18 @@ const styles = theme => ({
   root: {
     width: '100%',
     padding: '48px',
+    boxSizing: 'border-box',
   },
   paper: {
     position: 'absolute',
     top: '50%',
     left: '50%',
+    width: '400px',
     transform: 'translate(-50%, -50%)',
     backgroundColor: theme.palette.background.paper,
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing.unit * 4,
+    padding: '24px 48px',
     outline: 'none',
+    borderRadius: '8px',
   },
 });
 
@@ -94,7 +96,13 @@ class Trolly extends Component {
             </TableRow>
           </TableBody>
         </Table>
-        <div>
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'flex-end',
+            margin: '24px 8px',
+          }}
+        >
           <Button
             variant="contained"
             color="primary"

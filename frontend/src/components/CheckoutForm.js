@@ -2,21 +2,24 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import { CardElement, injectStripe } from 'react-stripe-elements';
-import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
 import { firebaseApp } from '../base';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'recompose';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actionCreators from '../actions/actionCreators';
+
 class CheckoutForm extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { complete: false };
-  }
+  state = {
+    processing: false,
+  };
 
   propTypes = {
     checkout: PropTypes.shape({}).isRequired,
+    userData: PropTypes.shape({}).isRequired,
+    trollyState: PropTypes.shape({}).isRequired,
+    history: PropTypes.func,
   };
 
   handleSubmit = ev => {
@@ -35,7 +38,8 @@ class CheckoutForm extends Component {
   };
 
   sendToken = token => {
-    const convertDollarsToCents = parseFloat(this.props.checkout.price) * 100;
+    const { checkout, history } = this.props;
+    const convertDollarsToCents = parseFloat(checkout.price) * 100;
     return axios
       .post('http://localhost:8080', {
         source: token.id,
@@ -46,7 +50,7 @@ class CheckoutForm extends Component {
         if (response.status === 200) {
           console.log({ response });
           this.updateCredit();
-          this.props.history.push('/paymentSuccess');
+          history.push('/paymentSuccess');
         }
       })
       .catch(error => {
@@ -79,14 +83,11 @@ class CheckoutForm extends Component {
     const db = firebaseApp.database();
 
     this.trueTrollyValues().map(userId => {
-      const ref = db.ref(`/HX73UEFkVKXXtFafKiu2I91z1j32/${userId}`);
+      const ref = db.ref(`/${userId}`);
 
       ref.set(this.updateUserData(userId), function(error) {
         if (error) {
           console.log({ error });
-          // The write failed...
-        } else {
-          // Data saved successfully!
         }
       });
     });
@@ -98,12 +99,23 @@ class CheckoutForm extends Component {
     if (this.state.processing) return <h1>Proceeding...🤑</h1>;
 
     return (
-      <div className="checkout">
-        <Typography variant="subtitle1">
-          Proceeding payment for ${checkout.price} NZD
-        </Typography>
-        <CardElement />
-        <button onClick={this.handleSubmit}>Send</button>
+      <div className="checkout" style={{ margin: '24px 0 8px' }}>
+        <CardElement style={{ margin: '24px 0' }} />
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'flex-end',
+            marginTop: '24px',
+          }}
+        >
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={this.handleSubmit}
+          >
+            Pay ${checkout.price} NZD
+          </Button>
+        </div>
       </div>
     );
   }
