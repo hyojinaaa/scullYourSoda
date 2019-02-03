@@ -11,7 +11,6 @@ const postStripeCharge = res => (stripeErr, stripeRes) => {
 };
 
 const paymentApi = app => {
-  console.log('paymentApi');
   app.get('/', (req, res) => {
     res.send({
       message: 'Hello Stripe checkout server!',

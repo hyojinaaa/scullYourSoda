@@ -11,6 +11,8 @@
 /build
 
 # misc
+/backend/config.local.json
+/backend/config.prod.json
 .DS_Store
 .env
 .env.local

@@ -30,12 +30,13 @@ class CheckoutForm extends Component {
       .catch(error => console.log('create token error', error));
   };
 
-  sendToken = token =>
-    axios
+  sendToken = token => {
+    const convertDollarsToCents = parseFloat(this.props.checkout.price) * 100;
+    return axios
       .post('http://localhost:8080', {
         source: token.id,
         currency: 'NZD',
-        amount: 50,
+        amount: convertDollarsToCents,
       })
       .then(responseJson => {
         console.log(responseJson);
@@ -44,6 +45,7 @@ class CheckoutForm extends Component {
       .catch(error => {
         console.log('sendToken error', error);
       });
+  };
 
   render() {
     const { checkout } = this.props;
