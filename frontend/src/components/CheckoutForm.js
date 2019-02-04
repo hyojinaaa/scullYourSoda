@@ -15,11 +15,11 @@ class CheckoutForm extends Component {
     processing: false,
   };
 
-  propTypes = {
+  static propTypes = {
     checkout: PropTypes.shape({}).isRequired,
     userData: PropTypes.shape({}).isRequired,
     trollyState: PropTypes.shape({}).isRequired,
-    history: PropTypes.func,
+    history: PropTypes.shape({}),
   };
 
   handleSubmit = ev => {
@@ -85,7 +85,7 @@ class CheckoutForm extends Component {
     this.trueTrollyValues().map(userId => {
       const ref = db.ref(`/${userId}`);
 
-      ref.set(this.updateUserData(userId), function(error) {
+      return ref.set(this.updateUserData(userId), function(error) {
         if (error) {
           console.log({ error });
         }
@@ -96,11 +96,19 @@ class CheckoutForm extends Component {
   render() {
     const { checkout } = this.props;
 
-    if (this.state.processing) return <h1>Proceeding...🤑</h1>;
+    if (this.state.processing)
+      return (
+        <h1>
+          Proceeding...
+          <span role="img" aria-label="emoji">
+            🤑
+          </span>
+        </h1>
+      );
 
     return (
       <div className="checkout" style={{ margin: '24px 0 8px' }}>
-        <CardElement style={{ margin: '24px 0' }} />
+        <CardElement />
         <div
           style={{
             display: 'flex',

@@ -40,8 +40,8 @@ class SubscriptionTable extends React.Component {
           <TableRow>
             <TableCell>Select</TableCell>
             <TableCell>User email</TableCell>
-            <TableCell numeric>Credit (NZD)</TableCell>
-            <TableCell numeric>Expire</TableCell>
+            <TableCell align="right">Credit (NZD)</TableCell>
+            <TableCell align="right">Expire</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -55,8 +55,8 @@ class SubscriptionTable extends React.Component {
                 />
               </TableCell>
               <TableCell>{userData[userId].email}</TableCell>
-              <TableCell numeric>${userData[userId].credit}</TableCell>
-              <TableCell numeric>{userData[userId].expire}</TableCell>
+              <TableCell align="right">${userData[userId].credit}</TableCell>
+              <TableCell align="right">{userData[userId].expire}</TableCell>
             </TableRow>
           ))}
         </TableBody>

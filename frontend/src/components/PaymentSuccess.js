@@ -59,7 +59,9 @@ class PaymentSuccess extends Component {
               marginTop: '0',
             }}
           >
-            🤑🤑🤑🤑🤑🤑🤑
+            <span role="img" aria-label="emoji">
+              🤑🤑🤑🤑🤑🤑🤑
+            </span>
           </Typography>
           <div
             style={{
