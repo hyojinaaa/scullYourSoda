@@ -14,7 +14,6 @@ const Router = () => (
         <Route exact path="/" component={SubscriptionBoard} />
         <Route path="/checkout" component={Checkout} />
         <Route path="/paymentSuccess" component={PaymentSuccess} />
-        <Route path="/charge" />
         <Route component={NotFound} />
       </Switch>
     </BrowserRouter>

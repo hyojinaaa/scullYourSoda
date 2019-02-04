@@ -32,7 +32,7 @@ const styles = {
 class PaymentSuccess extends Component {
   static propTypes = {
     history: PropTypes.shape({}).isRequired,
-    emptyTrolly: PropTypes.shape({}).isRequired,
+    emptyTrolly: PropTypes.func.isRequired,
   };
 
   handleRedirect = () => {

@@ -41,7 +41,7 @@ class CheckoutForm extends Component {
     const { checkout, history } = this.props;
     const convertDollarsToCents = parseFloat(checkout.price) * 100;
     return axios
-      .post('http://localhost:8080', {
+      .post(process.env.REACT_APP_BACKEND_SERVER_URL, {
         source: token.id,
         currency: 'NZD',
         amount: convertDollarsToCents,

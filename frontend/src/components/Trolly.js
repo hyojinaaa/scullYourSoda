@@ -35,7 +35,7 @@ const styles = theme => ({
 });
 
 class Trolly extends Component {
-  propTypes = {
+  static propTypes = {
     classes: PropTypes.shape({}).isRequired,
     trollyState: PropTypes.shape({}).isRequired,
     userData: PropTypes.shape({}).isRequired,

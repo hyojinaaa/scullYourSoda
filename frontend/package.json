@@ -128,5 +128,6 @@
       "src/**/*.story.js",
       "src/**/*.spec.js"
     ]
-  }
+  },
+  "proxy": "http://localhost:8080"
 }
