@@ -108,7 +108,15 @@ class CheckoutForm extends Component {
 
     return (
       <div className="checkout" style={{ margin: '24px 0 8px' }}>
-        <CardElement />
+        <div
+          style={{
+            border: '1px solid #e0e0e0',
+            padding: '8px 16px',
+            borderRadius: '2px',
+          }}
+        >
+          <CardElement />
+        </div>
         <div
           style={{
             display: 'flex',
